@@ -51,8 +51,17 @@ def get_voting_details(term: int, sitting: int, voting_number: str) -> str|None:
 
     return response.text
 
-def get_members(term: int) -> str:
+def get_members(term: int) -> str|None:
+    if term <= 0:
+        raise ValueError(f"Term number must be greater than 0: {term}")
+
     url = f"{SEJM_URL}/term{term}/MP"
-    response = requests.get(url)
-    response.raise_for_status()
+    try:
+        response = requests.get(url)
+        if response.status_code == 404:
+            return None
+        response.raise_for_status()
+    except requests.exceptions.RequestException as err:
+        raise RuntimeError(f"Error occurred while connecting to SEJM API: {err}")
+
     return response.text
