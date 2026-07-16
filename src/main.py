@@ -8,6 +8,3 @@ def get_data(year: int, month: int) -> None:
     data = get_voting(TERM, date_from, date_to)
     file_path = save(data, get_file_name(year, month))
     print(f"Saved in: {file_path}")
-
-if __name__ == "__main__":
-    get_data(2026, 6)
