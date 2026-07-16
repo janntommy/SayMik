@@ -30,3 +30,9 @@ def get_voting(term: int, date_from: str, date_to: str) -> str:
         raise RuntimeError(f"Error occurred while connecting to SEJM API: {err}")
     
     return response.text
+
+def get_members(term: int) -> str:
+    url = f"{SEJM_URL}/term{term}/MP"
+    response = requests.get(url)
+    response.raise_for_status()
+    return response.text
