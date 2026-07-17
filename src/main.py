@@ -1,7 +1,5 @@
-from api import get_data_format, get_voting
-from save_data import get_file_name, save, get_members_file_name
-from src.save_data import DATA_DIR
-import json
+from api import get_data_format, get_voting, get_members as api_get_members
+from save_data import get_file_name, get_members_file_name, save, DATA_DIR
 
 TERM = 10
 
@@ -12,6 +10,6 @@ def get_data(year: int, month: int) -> None:
     print(f"Raw voting file saved in: {file_path}")
 
 def get_members(term=TERM) -> None:
-    data = get_voting(term)
+    data = api_get_members(term)
     file_path = save(data, get_members_file_name(term))
     print(f"Members file saved in: {file_path}")
