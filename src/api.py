@@ -24,7 +24,7 @@ def get_voting(term: int, date_from: str, date_to: str) -> str:
 
     url = f"{SEJM_URL}/term{term}/votings/search"
     try:
-        response = requests.get(url, params={"dateFrom": date_from, "dateTo": date_to})
+        response = requests.get(url, params={"dateFrom": date_from, "dateTo": date_to}, timeout=10)
         response.raise_for_status()
     except requests.exceptions.RequestException as err:
         raise RuntimeError(f"Error occurred while connecting to SEJM API: {err}")
@@ -41,7 +41,7 @@ def get_voting_details(term: int, sitting: int, voting_number: str) -> str|None:
 
     url = f"{SEJM_URL}/term{term}/votings/{sitting}/{voting_number}"
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)
         if response.status_code == 404:
             return None
         response.raise_for_status()
@@ -57,7 +57,7 @@ def get_members(term: int) -> str|None:
 
     url = f"{SEJM_URL}/term{term}/MP"
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=45)
         if response.status_code == 404:
             return None
         response.raise_for_status()
