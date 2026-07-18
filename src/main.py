@@ -1,5 +1,5 @@
-from api import get_data_format, get_voting, get_members as api_get_members, get_voting_details
-from save_data import get_file_name, get_members_file_name, save, DATA_DIR, get_details_file_name
+from api import get_data_format, get_voting
+from save_data import get_file_name, save
 import json
 import time
 

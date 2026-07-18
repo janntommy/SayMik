@@ -1,5 +1,4 @@
 from main import get_data
-from api import get_members
 
 """
 GETTING AND SAVING DATA FROM SEJM API TESTS"
